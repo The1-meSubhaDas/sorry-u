@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 💔</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Starry background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Falling petals */
+        .petal {
+            position: fixed;
+            top: -20px;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) translateX(0px);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                transform: translateY(110vh) rotate(720deg) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Main card */
+        .card-container {
+            position: relative;
+            z-index: 10;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 520px;
+            width: 90vw;
+            text-align: center;
+            animation: cardAppear 1.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.4),
+                0 0 120px rgba(233, 69, 96, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .emoji-top {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #e94560;
+            margin-bottom: 8px;
+            text-shadow: 0 0 30px rgba(233, 69, 96, 0.4);
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e94560, transparent);
+            margin: 0 auto 30px;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        .message {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            animation: fadeInUp 1.5s ease-out 0.7s both;
+            margin-bottom: 30px;
+        }
+
+        .message p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            color: #e94560;
+            font-weight: 600;
+        }
+
+        .quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin: 25px 0;
+            padding: 15px;
+            border-left: 3px solid rgba(233, 69, 96, 0.4);
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+        }
+
+        .forgive-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 14px 45px;
+            background: linear-gradient(135deg, #e94560, #c23152);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.5s ease-out 1.1s both;
+            box-shadow: 0 8px 30px rgba(233, 69, 96, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .forgive-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .forgive-btn:hover::before {
+            left: 100%;
+        }
+
+        .forgive-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(233, 69, 96, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hearts burst on forgive */
+        .heart-burst {
+            position: fixed;
+            font-size: 2rem;
+            animation: burstHeart 1.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes burstHeart {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0.3);
+            }
+        }
+
+        /* Thank you state */
+        .thank-you {
+            display: none;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .thank-you .emoji-top {
+            font-size: 5rem;
+        }
+
+        .thank-you .title {
+            color: #4ecdc4;
+            text-shadow: 0 0 30px rgba(78, 205, 196, 0.4);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+            animation: fadeInUp 1.5s ease-out 1.3s both;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 35px 25px;
+            }
+            .title {
+                font-size: 2.4rem;
+            }
+            .message {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="card-container">
+        <div class="card" id="sorryCard">
+            <!-- Sorry State -->
+            <div id="sorryContent">
+                <span class="emoji-top">🥺</span>
+                <h1 class="title">I'm So Sorry</h1>
+                <p class="subtitle">from the bottom of my heart</p>
+                <div class="divider"></div>
+                <div class="message">
+                    <p>
+                        I know I <span class="highlight">hurt you</span>, and there are no words
+                        that can undo what happened. But I want you to know that
+                        I truly and deeply regret it.
+                    </p>
+                    <p>
+                        You mean <span class="highlight">everything</span> to me, and the thought
+                        of losing you breaks my heart into a million pieces.
+                    </p>
+                    <p>
+                        I promise to be <span class="highlight">better</span>, to listen more, 
+                        and to never take you for granted again.
+                    </p>
+                </div>
+                <div class="quote">
+                    "The bravest thing I ever did was apologize —<br>
+                    because you deserve nothing less than the truth."
+                </div>
+                <button class="forgive-btn" onclick="forgive()">
+                    💕 I Forgive You
+                </button>
+                <p class="footer-text">made with a heavy heart & hope 🤍</p>
+            </div>
+
+            <!-- Thank You State -->
+            <div class="thank-you" id="thankYou">
+                <span class="emoji-top">🥹</span>
+                <h1 class="title">Thank You</h1>
+                <p class="subtitle">you just made my world whole again</p>
+                <div class="divider" style="background: linear-gradient(90deg, transparent, #4ecdc4, transparent);"></div>
+                <div class="message">
+                    <p>
+                        I will <span class="highlight" style="color: #4ecdc4;">never</span> let you down again.
+                        This second chance means more to me than you'll ever know.
+                    </p>
+                    <p>💖 Forever grateful for you 💖</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            star.style.width = star.style.height = (1 + Math.random() * 3) + 'px';
+            starsContainer.appendChild(star);
+        }
+
+        // Create falling petals
+        const petals = ['🌸', '💔', '🥀', '💧', '✨'];
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (5 + Math.random() * 8) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            petal.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 15000);
+        }
+
+        // Create petals periodically
+        setInterval(createPetal, 600);
+        for (let i = 0; i < 8; i++) setTimeout(createPetal, i * 300);
+
+        // Forgive button handler
+        function forgive() {
+            // Burst hearts from button
+            const btn = document.querySelector('.forgive-btn');
+            const rect = btn.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+
+            const hearts = ['💖', '💕', '💗', '💓', '✨', '🌟', '💝'];
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-burst';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = cx + 'px';
+                heart.style.top = cy + 'px';
+                const angle = (Math.PI * 2 * i) / 25;
+                const dist = 100 + Math.random() * 200;
+                heart.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                heart.style.setProperty('--ty', Math.sin(angle) * dist - 100 + 'px');
+                heart.style.animationDelay = Math.random() * 0.3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 2000);
+            }
+
+            // Switch content
+            setTimeout(() => {
+                document.getElementById('sorryContent').style.display = 'none';
+                const ty = document.getElementById('thankYou');
+                ty.style.display = 'block';
+            }, 600);
+        }
+    </script>
+</body>
+</html>
+
